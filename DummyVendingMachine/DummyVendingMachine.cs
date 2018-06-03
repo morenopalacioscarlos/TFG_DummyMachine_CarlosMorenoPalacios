@@ -56,7 +56,11 @@ namespace DummyVendingMachine
                 var values = new NameValueCollection();
                 values["idMachine"] = TokenMachine1;
                 string address = "http://localhost:49906/api/Soldeds/PostNewSale/" + $"{IdMachine1}/{TokenMachine1}/{product}/{idSlotProduct}/{Count1Cent.Text}-{Count2Cent.Text}-{Count5Cent.Text}-{Count10Cent.Text}-{Count20Cent.Text}-{Count50Cent.Text}-{Count1Eur.Text}-{Count2Eur.Text}";
-                client.UploadValues(address, values);
+                try
+                {
+                    client.UploadValues(address, values);
+                }
+                catch (Exception e) { }
             }
         }
 
@@ -168,7 +172,12 @@ namespace DummyVendingMachine
         private async void getProductpriceAsync(int idSlot, int idProduct, TextBox textBox)
         {
             string conexion = "http://localhost:49906/api/Slots/GetSlots" + $"/{IdMachine1}/{TokenMachine1}/{idSlot}/{idProduct}";
-            textBox.Text = await client.GetStringAsync(conexion);
+            try
+            {
+                textBox.Text = await client.GetStringAsync(conexion);
+            }
+            catch (Exception e) { }
+
         }
 
         /// <summary>
